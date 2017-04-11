@@ -2,7 +2,7 @@ from sanic import Sanic
 from lantern.route import main_route
 
 
-app = Sanic()
+app = Sanic(__name__)
 
 
 def main():
