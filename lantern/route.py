@@ -5,10 +5,16 @@ from lantern.request import serialize_request
 import os
 
 
-async def main_route(request, path=None):
-    handle = os.path.join(os.path.dirname(__file__), 'test_handle.py')
-    result = execute_handle(handle, serialize_request(request))
-    if result.exit_code != 0:
-        return error_response(result.error)
+def build_main_route(args):
+    handle = os.path.abspath(args.handler)
+    if not os.path.isfile(handle) or not os.access(handle, os.X_OK):
+        raise FileNotFoundError("Can't find handle at {}".format(handle))
 
-    return html(result.html, status=200)
+    async def main_route(request, path=None):
+        result = execute_handle(handle, serialize_request(request))
+        if result.exit_code != 0:
+            return error_response(result.error)
+
+        return html(result.html, status=200)
+
+    return main_route
