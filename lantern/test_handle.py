@@ -2,4 +2,5 @@
 
 # Test handler
 
-print("<h1>Test</h1>")
+import sys
+print(sys.stdin.read())
