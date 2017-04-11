@@ -1,8 +1,10 @@
 from sanic import Sanic
+from sanic_useragent import SanicUserAgent
 from lantern.route import main_route
 import os
 
 app = Sanic(__name__)
+SanicUserAgent.init_app(app)
 
 
 def main():
