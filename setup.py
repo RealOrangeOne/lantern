@@ -6,7 +6,8 @@ setup(
     version="1.0",
     install_requires=[
         "sanic==0.4.1",
-        "sanic-useragent==0.1.2"
+        "sanic-useragent==0.1.2",
+        "Jinja2==2.9.6"
     ],
     entry_points="""
         [console_scripts]
