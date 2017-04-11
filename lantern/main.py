@@ -8,7 +8,7 @@ SanicUserAgent.init_app(app)
 
 
 def main():
-    workers = int(os.cpu_count()) or 1
+    workers = os.cpu_count() or 1
     app.add_route(main_route, "/<path>")
     app.add_route(main_route, "/")
     app.run(host="0.0.0.0", port=8000, workers=workers)
