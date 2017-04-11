@@ -1,18 +1,11 @@
 from sanic import Sanic
-from sanic.response import json, text
-from sanic.exceptions import NotFound
+from lantern.route import main_route
+
 
 app = Sanic()
 
-@app.route("/")
-async def test(request):
-    return json({"hello": "world"})
-
-
-@app.exception(NotFound)
-def ignore_404s(request, exception):
-    return text("Page not found at {}".format(request.url), status=404)
-
 
 def main():
+    app.add_route(main_route, "/<path>")
+    app.add_route(main_route, "/")
     app.run(host="0.0.0.0", port="8000")
