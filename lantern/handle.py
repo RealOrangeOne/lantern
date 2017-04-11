@@ -12,7 +12,7 @@ def execute_handle(executable, request_data):
     return Result(
         cmd.returncode,
         cmd.stdout.decode('utf-8'),
-        cmd.stderr.decode('utf-8')
+        cmd.stderr.decode('utf-8') if cmd.stderr is not None else None
     )
 
 
